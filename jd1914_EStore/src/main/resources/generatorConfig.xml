@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mybatis-generator的核心配置文件 -->
+<generatorConfiguration>
+    <!-- location改为你的maven库中 mysql-connector-java-5.1.25.jar 位置-->
+	<classPathEntry
+		location="D:\MyTools\maven\repository\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- 注意！如果要重新生成pojo类，务必改成项目组数据库，用户名密码 -->
+		<!-- connectionURL 设置成对应公网IP和数据库名-->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://39.106.211.84:3306/EStore_2" userId="root"
+			password="root">
+		</jdbcConnection>
+
+
+		<!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--自动生成的实体的存放包路径 -->
+		<javaModelGenerator targetPackage="com.briup.zhaowenjie.book.bean"
+			targetProject="./src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--自动生成的*Mapper.xml文件存放路径 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!--自动生成的*Mapper.java存放路径 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.briup.zhaowenjie.book.mapper" targetProject="./src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+		<!-- 映射配置 -->
+		<table tableName="es_book" domainObjectName="Book"></table>
+		<table tableName="es_category" domainObjectName="Category"></table>
+		<table tableName="es_orderForm" domainObjectName="OrderForm"></table>
+		<table tableName="es_orderLine" domainObjectName="OrderLine"></table>
+		<table tableName="es_shopAddress" domainObjectName="ShopAddress"></table>
+		<table tableName="es_customer" domainObjectName="Customer"></table>
+	</context>
+</generatorConfiguration>
